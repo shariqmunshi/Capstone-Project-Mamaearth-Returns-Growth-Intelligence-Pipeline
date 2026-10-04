@@ -1,0 +1,8 @@
+Situation
+Our recent audit of Mamaearth’s regional sales performance indicates that the raw total revenue before cleaning stood at Rs 99,860.20. To ensure financial accuracy for the regional ops and finance heads, we performed a thorough reconciliation process to account for reporting errors. This resulted in a cleaned total revenue of Rs 97,358.30. The difference caused by removing duplicate double-submitted orders amounted to Rs 2,501.90, providing a more realistic baseline for our current fiscal standing and ensuring that our top-line figures are not artificially inflated by technical submission errors.
+
+Complication
+The data reveals significant volatility in fulfillment success across different payment channels, which impacts our bottom line. While CARD transactions show a return rate of 14.7% and UPI stands at 18.9%, the COD return rate is a concerning 44.4%. Our highest-risk segment is specifically COD orders in Tier-2 cities, where the return rate 54.5% poses a major threat to logistics efficiency. Additionally, initial reporting suggested January (2026-01) looked highest at Rs 29,582.10; however, that figure is Rs 11,637.10 after excluding two bulk orders that skewed the monthly average and misrepresented organic demand.
+
+Resolution
+By correcting these distortions, we have determined that the true peak revenue month is March (2026-03), reaching Rs 20,318.90. Moving forward, the finance team should focus on the March (2026-03) growth drivers while operations must implement stricter verification for the 54.5% return rate segment in Tier-2 cities. This data-driven approach ensures that our strategic decisions are based on the cleaned total revenue of Rs 97,358.30 rather than the initial raw figures.
