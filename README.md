@@ -94,7 +94,7 @@ In Colab: `import os; os.environ["GEMINI_API_KEY"] = "your-key"` in a cell, then
 - In both cases a checker prints PASS/FAIL for each required figure: 97,358.30; 44.4; 54.5; 2,501.90; March; 20,318.90.
 
 Gemini settings: system instruction separate from the prompt, `temperature=0.0` (factual report),
-explicit `max_output_tokens`, a 30-second timeout, and all errors returned as a structured dict.
+explicit `max_output_tokens`, a 60-second timeout, and all errors returned as a structured dict.
 
 ## Key findings
 
