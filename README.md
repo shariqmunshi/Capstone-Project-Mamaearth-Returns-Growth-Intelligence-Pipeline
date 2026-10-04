@@ -11,33 +11,44 @@ No layer reports a number it did not compute or receive from the layer before it
 ## Repo structure
 
 ```
-README.md
-sql/
-  schema.sql          CREATE TABLE statements (customers, products, orders)
-  seed_data.sql       INSERTs generated from data/*.csv (raw, uncleaned; blanks -> NULL)
-  reports.sql         Reports (a)-(i), actual output pasted above each query
-  make_seed.py        regenerates seed_data.sql from the CSVs
-  run_sql.py          builds returns.db and runs everything (no SQLite install needed)
-data/
-  customers.csv  products.csv  orders.csv     committed exactly as given, never edited
-analysis/
-  clean_and_eda.py    Part 2: cleaning, EDA; ends by writing narrator/findings.json
-  visualize.py        Part 2: the two charts
-visualizations/
-  return_rate_by_payment.png  monthly_revenue_trend.png
-narrator/
-  findings.json       written by analysis/clean_and_eda.py (never hand-typed)
-  generate_narrative.py   SCR narrator (Gemini online path + offline fallback) and number checker
-  sample_output.txt   saved live Gemini output, checked by the same checker
+<repo>/
+├── README.md
+├── sql/
+│   ├── schema.sql              CREATE TABLE statements (customers, products, orders)
+│   ├── seed_data.sql           INSERTs generated from data/*.csv (raw, uncleaned; blanks -> NULL)
+│   ├── reports.sql             Reports (a)-(i), actual output pasted above each query
+│   ├── make_seed.py            (extra) regenerates seed_data.sql from the CSVs
+│   └── run_sql.py              (extra) builds returns.db and runs everything, no SQLite install needed
+├── data/
+│   ├── customers.csv           committed exactly as given, never edited
+│   ├── products.csv
+│   └── orders.csv
+├── analysis/
+│   ├── clean_and_eda.py        Part 2: cleaning and EDA; ends by writing narrator/findings.json
+│   └── visualize.py            Part 2: the two charts
+├── visualizations/
+│   ├── return_rate_by_payment.png
+│   └── monthly_revenue_trend.png
+└── narrator/
+    ├── findings.json           written by analysis/clean_and_eda.py (never hand-typed)
+    ├── generate_narrative.py   SCR narrator (Gemini online path + offline fallback) and number checker
+    └── sample_output.txt       saved live Gemini output, checked by the same checker (required by Part 3)
 ```
+
+Files marked "(extra)" are helpers that are not part of the required tree; `sample_output.txt` is required by Part 3, Task 5.
 
 ## Setup
 
-Python 3.9+ is required. Run every command from the **repo root** (the folder containing `data/`).
+Python 3.9+ is required. Get the repo and install the libraries:
 
 ```
+git clone https://github.com/shariqmunshi/Capstone-Project-Mamaearth-Returns-Growth-Intelligence-Pipeline--Mohammed-Shariq-Munshi.git
+cd Capstone-Project-Mamaearth-Returns-Growth-Intelligence-Pipeline--Mohammed-Shariq-Munshi
 pip install pandas matplotlib google-genai
 ```
+
+Run every command below from the **repo root** (the folder containing `data/`). In Google Colab, use
+`!git clone <url>` and `%cd <folder name>` instead of `cd`, and put `!` in front of each command.
 
 ## Run order (and how data flows between layers)
 
@@ -57,7 +68,8 @@ sqlite3 returns.db < sql/schema.sql
 sqlite3 returns.db < sql/seed_data.sql
 sqlite3 returns.db < sql/reports.sql
 ```
-No SQLite install? This does the same with Python's built-in sqlite3 (and regenerates `seed_data.sql`):
+No SQLite command line (for example in Colab)? This does the same with Python's built-in sqlite3 and
+regenerates `seed_data.sql`:
 ```
 python sql/run_sql.py
 ```
@@ -70,7 +82,9 @@ python analysis/clean_and_eda.py
 python analysis/visualize.py
 ```
 `clean_and_eda.py` prints every intermediate result for Tasks 1-10. **Its final step (the Export section)
-writes `narrator/findings.json`.** `visualize.py` writes the two PNGs to `visualizations/`.
+writes `narrator/findings.json`**, collecting the verified numbers computed above it: the cleaned total and
+reconciliation delta from Task 5, the COD return rates and highest-risk segment from Tasks 7-8, and the
+outlier-corrected peak month from Task 10. `visualize.py` writes the two PNGs to `visualizations/`.
 
 Reconciliation with Part 1: the cleaned total is 97,358.30 versus Part 1's raw 99,860.20.
 The 2,501.90 difference is exactly the order value of the 5 duplicate orders (O0176-O0180) removed in cleaning.
